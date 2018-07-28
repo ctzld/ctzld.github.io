@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="ctzld心路">
 <meta property="og:description" content="前言今天开始，学校生活结束，正式开始工作。为了全面提高自己的综合素质，决定搭建一个博客，记录一下自己的心路历程，正好原来无聊申请的域名也可以用一下。博客框架采用的是静态博客框架，在Windows64平台下具体采用的是的GitHub Page + Hexo，原因主要有下面几点：  经济方面，GitHub Page可以提供免费、快捷的服务，不用租vps，且这种静态网站可以满足自己的需求。 可拓展性方面">
 <meta property="og:image" content="http://lizengkun.cn/images/ym.png">
-<meta property="og:updated_time" content="2017-07-09T14:28:07.887Z">
+<meta property="og:updated_time" content="2018-07-28T07:51:05.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="github + hexo 搭建自己的博客">
 <meta name="twitter:description" content="前言今天开始，学校生活结束，正式开始工作。为了全面提高自己的综合素质，决定搭建一个博客，记录一下自己的心路历程，正好原来无聊申请的域名也可以用一下。博客框架采用的是静态博客框架，在Windows64平台下具体采用的是的GitHub Page + Hexo，原因主要有下面几点：  经济方面，GitHub Page可以提供免费、快捷的服务，不用租vps，且这种静态网站可以满足自己的需求。 可拓展性方面">
@@ -417,7 +417,8 @@
 <li>实用性方面，博客采用纯文本格式<a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">Markdown</a>，书写方便。</li>
 <li>平台方面，jekyll依基于Ruby实现，安装Jekyll需要搭建Ruby环境，在Windows搭建Ruby环境并不是被推荐的，而 Hexo基于NodeJs实现，在Windows上安装NodeJs开发环境简单。</li>
 </ol>
-<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>无论是windows还是linux，都需要下面的环境，只需要下载安装自己对应的版本。</p>
+<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><p>这里只是简单记录了几个重要步骤，github page搭建、Hexo搭建、部署。具体的细节可以参照引用。</p>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>无论是windows还是linux，都需要下面的环境，只需要下载安装自己对应的版本。</p>
 <ol>
 <li><a href="https://git-scm.com/" target="_blank" rel="external">Git</a> 环境</li>
 <li><a href="https://nodejs.org/en/download/" target="_blank" rel="external">nodejs</a>环境</li>
@@ -436,6 +437,11 @@
 <h4 id="第三方服务"><a href="#第三方服务" class="headerlink" title="第三方服务"></a>第三方服务</h4><p><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">next</a>中介绍了很多第三方服务，可以根据需求自行添加。</p>
 <h3 id="域名绑定"><a href="#域名绑定" class="headerlink" title="域名绑定"></a>域名绑定</h3><h4 id="域名绑定到github"><a href="#域名绑定到github" class="headerlink" title="域名绑定到github"></a>域名绑定到github</h4><p>域名绑定，我实在万网上购买域名，可以直接添加域名解析。进入域名界面，添加解析到github的两条A类记录，可以直接复制。如下图：<img src="/images/ym.png" alt=""><br>设置好以后，dns将你的域名解析给github，下面让github可以找到你的GitHub page。</p>
 <h4 id="Github解析"><a href="#Github解析" class="headerlink" title="Github解析"></a>Github解析</h4><p>在Github的xxx.github.io项目,进入【Settings】标签页,在【Custom domain】功能中,将刚刚申请的域名写进去。保存以后，GitHub下会发现多出一个CNAME文件，至此大功告成（最好将CNAME再保存在blog下的source下）。dns域名解析，有10min延迟，所以需要等待10min。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li><a href="https://www.jianshu.com/p/f4cc5866946b" target="_blank" rel="external">手把手教从零开始在GitHub上使用Hexo搭建博客教程</a></li>
+<li><a href="https://hexo.io/zh-tw/docs/commands.html" target="_blank" rel="external">Hexo 指令介绍</a></li>
+<li><a href="http://www.cnblogs.com/seayxu/p/5548243.html" target="_blank" rel="external">Hexo 配置文件说明</a></li>
+</ol>
 
       
     </div>
@@ -619,7 +625,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建过程"><span class="nav-number">2.</span> <span class="nav-text">搭建过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境"><span class="nav-number">2.1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-page搭建"><span class="nav-number">2.2.</span> <span class="nav-text">GitHub page搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo搭建"><span class="nav-number">2.3.</span> <span class="nav-text">Hexo搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Hexo"><span class="nav-number">2.3.1.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Hexo配置包"><span class="nav-number">2.3.2.</span> <span class="nav-text">安装Hexo配置包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建Hexo"><span class="nav-number">2.3.3.</span> <span class="nav-text">创建Hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo-部署"><span class="nav-number">2.4.</span> <span class="nav-text">Hexo 部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo优化"><span class="nav-number">2.5.</span> <span class="nav-text">Hexo优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主题更换"><span class="nav-number">2.5.1.</span> <span class="nav-text">主题更换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主题优化"><span class="nav-number">2.5.2.</span> <span class="nav-text">主题优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三方服务"><span class="nav-number">2.5.3.</span> <span class="nav-text">第三方服务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#域名绑定"><span class="nav-number">2.6.</span> <span class="nav-text">域名绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#域名绑定到github"><span class="nav-number">2.6.1.</span> <span class="nav-text">域名绑定到github</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Github解析"><span class="nav-number">2.6.2.</span> <span class="nav-text">Github解析</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建过程"><span class="nav-number">2.</span> <span class="nav-text">搭建过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境"><span class="nav-number">2.1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GitHub-page搭建"><span class="nav-number">2.2.</span> <span class="nav-text">GitHub page搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo搭建"><span class="nav-number">2.3.</span> <span class="nav-text">Hexo搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Hexo"><span class="nav-number">2.3.1.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Hexo配置包"><span class="nav-number">2.3.2.</span> <span class="nav-text">安装Hexo配置包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建Hexo"><span class="nav-number">2.3.3.</span> <span class="nav-text">创建Hexo</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo-部署"><span class="nav-number">2.4.</span> <span class="nav-text">Hexo 部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo优化"><span class="nav-number">2.5.</span> <span class="nav-text">Hexo优化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#主题更换"><span class="nav-number">2.5.1.</span> <span class="nav-text">主题更换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主题优化"><span class="nav-number">2.5.2.</span> <span class="nav-text">主题优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三方服务"><span class="nav-number">2.5.3.</span> <span class="nav-text">第三方服务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#域名绑定"><span class="nav-number">2.6.</span> <span class="nav-text">域名绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#域名绑定到github"><span class="nav-number">2.6.1.</span> <span class="nav-text">域名绑定到github</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Github解析"><span class="nav-number">2.6.2.</span> <span class="nav-text">Github解析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -642,7 +648,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

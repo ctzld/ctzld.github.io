@@ -12,7 +12,8 @@
 <li>实用性方面，博客采用纯文本格式<a href="https://zh.wikipedia.org/wiki/Markdown" target="_blank" rel="external">Markdown</a>，书写方便。</li>
 <li>平台方面，jekyll依基于Ruby实现，安装Jekyll需要搭建Ruby环境，在Windows搭建Ruby环境并不是被推荐的，而 Hexo基于NodeJs实现，在Windows上安装NodeJs开发环境简单。</li>
 </ol>
-<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>无论是windows还是linux，都需要下面的环境，只需要下载安装自己对应的版本。</p>
+<h2 id="搭建过程"><a href="#搭建过程" class="headerlink" title="搭建过程"></a>搭建过程</h2><p>这里只是简单记录了几个重要步骤，github page搭建、Hexo搭建、部署。具体的细节可以参照引用。</p>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>无论是windows还是linux，都需要下面的环境，只需要下载安装自己对应的版本。</p>
 <ol>
 <li><a href="https://git-scm.com/" target="_blank" rel="external">Git</a> 环境</li>
 <li><a href="https://nodejs.org/en/download/" target="_blank" rel="external">nodejs</a>环境</li>
@@ -31,6 +32,11 @@
 <h4 id="第三方服务"><a href="#第三方服务" class="headerlink" title="第三方服务"></a>第三方服务</h4><p><a href="http://theme-next.iissnan.com/" target="_blank" rel="external">next</a>中介绍了很多第三方服务，可以根据需求自行添加。</p>
 <h3 id="域名绑定"><a href="#域名绑定" class="headerlink" title="域名绑定"></a>域名绑定</h3><h4 id="域名绑定到github"><a href="#域名绑定到github" class="headerlink" title="域名绑定到github"></a>域名绑定到github</h4><p>域名绑定，我实在万网上购买域名，可以直接添加域名解析。进入域名界面，添加解析到github的两条A类记录，可以直接复制。如下图：<img src="/images/ym.png" alt=""><br>设置好以后，dns将你的域名解析给github，下面让github可以找到你的GitHub page。</p>
 <h4 id="Github解析"><a href="#Github解析" class="headerlink" title="Github解析"></a>Github解析</h4><p>在Github的xxx.github.io项目,进入【Settings】标签页,在【Custom domain】功能中,将刚刚申请的域名写进去。保存以后，GitHub下会发现多出一个CNAME文件，至此大功告成（最好将CNAME再保存在blog下的source下）。dns域名解析，有10min延迟，所以需要等待10min。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li><a href="https://www.jianshu.com/p/f4cc5866946b" target="_blank" rel="external">手把手教从零开始在GitHub上使用Hexo搭建博客教程</a></li>
+<li><a href="https://hexo.io/zh-tw/docs/commands.html" target="_blank" rel="external">Hexo 指令介绍</a></li>
+<li><a href="http://www.cnblogs.com/seayxu/p/5548243.html" target="_blank" rel="external">Hexo 配置文件说明</a></li>
+</ol>
 ]]></content>
       
         <categories>
