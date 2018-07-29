@@ -79,7 +79,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="linux,内存," />
 
 
 
@@ -95,15 +95,20 @@
 
 
 
-<meta name="description" content="从刚走出校园这一刻开始记载，……">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ctzld心路">
-<meta property="og:url" content="http://lizengkun.cn/archives/2017/index.html">
+<meta name="description" content="前言这周终于抽时间把内存知识重新梳理一下，记录如下。本文是一篇概论性文章，主要目的在于帮助形成正确的结构以及层次，不会有非常具体的讨论，但每个算法具体的一些细节和比较会在引用中给出。 我对内存的认识，现在主要几部分，第一部分 计算机组成原理中虚拟内存、swap、内存映射。这一步是内存的基础，其核心所涉及的cache理念、中间层，也是我们的系统设计最宝贵的财富，值得我们细细品味，灵活运用；第二部分是">
+<meta name="keywords" content="linux,内存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux内存管理概论（二）">
+<meta property="og:url" content="http://lizengkun.cn/操作系统/memory-management/index.html">
 <meta property="og:site_name" content="ctzld心路">
-<meta property="og:description" content="从刚走出校园这一刻开始记载，……">
+<meta property="og:description" content="前言这周终于抽时间把内存知识重新梳理一下，记录如下。本文是一篇概论性文章，主要目的在于帮助形成正确的结构以及层次，不会有非常具体的讨论，但每个算法具体的一些细节和比较会在引用中给出。 我对内存的认识，现在主要几部分，第一部分 计算机组成原理中虚拟内存、swap、内存映射。这一步是内存的基础，其核心所涉及的cache理念、中间层，也是我们的系统设计最宝贵的财富，值得我们细细品味，灵活运用；第二部分是">
+<meta property="og:image" content="http://lizengkun.cn/操作系统/memory-management/memory_model.jpg">
+<meta property="og:image" content="http://lizengkun.cn/操作系统/memory-management/chunk.png">
+<meta property="og:updated_time" content="2018-07-29T09:40:46.409Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ctzld心路">
-<meta name="twitter:description" content="从刚走出校园这一刻开始记载，……">
+<meta name="twitter:title" content="linux内存管理概论（二）">
+<meta name="twitter:description" content="前言这周终于抽时间把内存知识重新梳理一下，记录如下。本文是一篇概论性文章，主要目的在于帮助形成正确的结构以及层次，不会有非常具体的讨论，但每个算法具体的一些细节和比较会在引用中给出。 我对内存的认识，现在主要几部分，第一部分 计算机组成原理中虚拟内存、swap、内存映射。这一步是内存的基础，其核心所涉及的cache理念、中间层，也是我们的系统设计最宝贵的财富，值得我们细细品味，灵活运用；第二部分是">
+<meta name="twitter:image" content="http://lizengkun.cn/操作系统/memory-management/memory_model.jpg">
 
 
 
@@ -131,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://lizengkun.cn/archives/2017/"/>
+  <link rel="canonical" href="http://lizengkun.cn/操作系统/memory-management/"/>
 
 
 
 
 
-  <title>归档 | ctzld心路</title>
+  <title>linux内存管理概论（二） | ctzld心路</title>
   
 
 
@@ -172,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left  page-archive  ">
+  <div class="container sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -310,66 +315,200 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 2 篇日志。 继续努力。
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lizengkun.cn/操作系统/memory-management/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ctzld">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/bg.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ctzld心路">
     </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">linux内存管理概论（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-29T15:50:27+08:00">
+                2018-07-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/操作系统/" itemprop="url" rel="index">
+                    <span itemprop="name">操作系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
-      
 
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这周终于抽时间把内存知识重新梳理一下，记录如下。本文是一篇概论性文章，主要目的在于帮助形成正确的结构以及层次，不会有非常具体的讨论，但每个算法具体的一些细节和比较会在引用中给出。</p>
+<p>我对内存的认识，现在主要几部分，第一部分 计算机组成原理中虚拟内存、swap、内存映射。这一步是内存的基础，其核心所涉及的cache理念、中间层，也是我们的系统设计最宝贵的财富，值得我们细细品味，灵活运用；第二部分是linux内存管理。大型项目，例如STL库，Python等语言设计为了实现高效率，都会在系统之上再设计一层内存管理，但我认为linux的内存管理应当是最普适，给我们帮助最多的，也是我们接触最多的；第三部分是：内存的使用以及度量。包括一些系统api对内存如何影响和使用，linux内存的查看，这些是实践中我们经常遇到的问题，有助于解决一些线上问题。</p>
+<h2 id="主要概念、算法"><a href="#主要概念、算法" class="headerlink" title="主要概念、算法"></a>主要概念、算法</h2><p>我们知道linux是由内核态和用户态之分的，两种模式的存在，天然的分离了用户和系统的一些操作，保证了系统的安全可靠。所以从内存管理里来说，内核态和用户态的内存管理是不同的。linux内存管理主要有：用户态的内存管理，主要包括glibc的ptmalloc、google的tcmalloc等；linux内核态的小对象的slab分配器算法；linux伙伴算法。其三者的关系见下图：<img src="memory_model.jpg" alt=""></p>
+<h3 id="用户态的分配算法"><a href="#用户态的分配算法" class="headerlink" title="用户态的分配算法"></a>用户态的分配算法</h3><p>这里我们大概讲一下glibc的ptmalloc实现，该实现是系统默认的实现，是大家打交道比较多的。其涉及到的主要概念是chunk， bins。</p>
+<h4 id="chunk"><a href="#chunk" class="headerlink" title="chunk"></a>chunk</h4><p>在Glibc的堆内存管理中，chunk是堆内存分配的基本的单位，它表示堆内存中连续的内存单元。比方说我们通过malloc(8)申请一个连续的8字节内存，则Glibc会分配我们一个大小为8(chunk size + previous size)+8(payload)大小的chunk，这也就解释了free(void*)一块内存，只需要给出一个地址，因为可以根据结构找到大小以及相邻信息，从而完成释放的过程。，其结构如下：<img src="chunk.png" alt=""></p>
+<h4 id="bins"><a href="#bins" class="headerlink" title="bins"></a>bins</h4><p>将相似大小的chunk用双向链表链接起来，这样的一个链表就被叫做bin。ptmalloc一共维护了128个bin。bins的目的就在于分配的时候能快速索引，根据规则找到合适的chunk。同时为了快速分配、回收小内存，专门设置了Fast Bins，（小内存Cache很关键，因为是高频的使用和释放的）；为了整理分配过内存，避免过多小内存碎片，设置了unsorted bin，专门接受要释放的合适大小的chunk，整理后再放回普通bin中。</p>
+<p>分配算法的简单流程可以看作是先计算chunk大小，根据规则寻找bin,如果不符合向系统申请，释放简单来看就是一个寻找bin的反过程。实际上chunk的组织方式，分配、释放都是包含着具体的trick和一些设计哲学的，关于具体的实现和较为详细流程可以参照这几篇文章:<a href="https://segmentfault.com/a/1190000013059779" target="_blank" rel="external">关于Ptmalloc的一点总结</a>， <a href="http://blog.binpang.me/2017/09/22/ptmalloc%E5%A0%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" target="_blank" rel="external">ptmalloc堆内存管理</a>。如果感兴趣，也可以去读一下源码，<br><a href="https://paper.seebug.org/papers/Archive/refs/heap/glibc%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86ptmalloc%E6%BA%90%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90.pdf" target="_blank" rel="external">Ptmalloc2 源代码分析.华庭</a></p>
+<p>ptmalloc虽然取得了效率与空间的平衡，但是在空间利用率、效率、多线程表现等方面还是可以更好的。下面几篇文章介绍了ptmalloc、tcmalloc、jemalloc，并进行了一些比较。<a href="https://blog.csdn.net/huangynn/article/details/50700093" target="_blank" rel="external">几种malloc实现原理</a>, <a href="https://www.jianshu.com/p/91d2956f22c1" target="_blank" rel="external">ptmalloc/tcmalloc/jemalloc内存分配策略</a>。</p>
+<h3 id="内核态的slab分配器"><a href="#内核态的slab分配器" class="headerlink" title="内核态的slab分配器"></a>内核态的slab分配器</h3><p>在linux内核中， 像用户程序一样，内核也需要动态分配内存，由于内核无法借助标准的C库，linux内核实现的是slab分配器。相比于用户态的内存分配，内核的内存分配，变量种类和结构相对已知，所以可以在chunk粒度基础上做一些优化。slab 是 slab 分配器进行操作的最小分配单位，一个slab来自物理内存管理器的一到多个物理页，该slab被划分成一个个对象，这些对象是从特定缓存中进行分配和释放的基本元素。多个slab被连接为一个队列，通常为了使用方便，需要三个队列，即使用完的队列、部分使用的队列，未使用的队列。三个队列就构成了一个对象池，而内核就是维护了一个对象池（kmem_cache）的链表。基本结构见下图：<a href="slab.gif"></a></p>
+<p>与传统的内存管理模式相比， slab 缓存分配器提供了很多优点。首先，内核通常依赖于对小对象的分配，它们会在系统生命周期内进行无数次分配。slab 缓存分配器通过对类似大小的对象进行缓存而提供这种功能，从而避免了常见的碎片问题。slab 分配器还支持通用对象的初始化，从而避免了为同一目而对一个对象重复进行初始化。最后，slab 分配器还可以支持硬件缓存对齐和着色，这允许不同缓存中的对象占用相同的缓存行，从而提高缓存的利用率并获得更好的性能。</p>
+<p>下面文章给了一些更详细的描述，<a href="https://www.ibm.com/developerworks/cn/linux/l-linux-slab-allocator/index.html" target="_blank" rel="external">Linux slab 分配器剖析</a>, <a href="https://blog.csdn.net/goodluckwhh/article/details/10026311" target="_blank" rel="external">slab分配器</a></p>
+<h3 id="伙伴算法"><a href="#伙伴算法" class="headerlink" title="伙伴算法"></a>伙伴算法</h3><p>无论是用户态分配算法还是内核态分配算法，应该是在虚拟地址空间进行分配，实际上真正分配物理内存是通过缺页中断引起。随着用户程序的执行和结束，就需要不断地为其分配和释放物理页面。内核应该为分配一组连续的页面而建立一种稳定、高效的分配策略。但是，频繁地请求和释放不同大小的一组连续页面，必然导致在已分配的内存块中分散许多小块的空闲页面，即外碎片，由此带来的问题是，即使这些小块的空闲页面加起来足以满足所请求的页面，但是要分配一个大块的连续页面可能就根本无法满足。为此，Linux采用著名的伙伴（Buddy）算法来解决外碎片问题。</p>
+<p>伙伴算法比较简单，即将内存按2的幂进行划分，相当于分离出若干个块大小一致的空闲链表，搜索该链表并给出同需求最佳匹配的大小。至于具体介绍可以看一下<a href="https://en.wikipedia.org/wiki/Buddy_memory_allocation" target="_blank" rel="external">好友内存分配</a>, 至于简单版实现，可以参照云风，<a href="https://blog.codingnow.com/2011/12/buddy_memory_allocation.html" target="_blank" rel="external">伙伴内存分配器</a></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2>
+      
+    </div>
+
+    <div>
       
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wx.jpg" alt="ctzld WeChat Pay"/>
+          <p>微信打赏</p>
         </div>
       
       
+    </div>
+  </div>
+
 
       
+    </div>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
+    <div>
+      
         
-            <a class="post-title-link" href="/捣鼓/hexo/" itemprop="url">
-              
-                <span itemprop="name">github + hexo 搭建自己的博客</span>
-              
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-03T23:14:27+08:00"
-              content="2017-07-03" >
-          07-03
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/内存/" rel="tag"># 内存</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/捣鼓/hexo/" rel="next" title="github + hexo 搭建自己的博客">
+                <i class="fa fa-chevron-left"></i> github + hexo 搭建自己的博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
 
-    
-
-  </section>
-
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -377,6 +516,12 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
 
         </div>
         
@@ -396,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/bg.jpg"
@@ -459,6 +613,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要概念、算法"><span class="nav-number">2.</span> <span class="nav-text">主要概念、算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用户态的分配算法"><span class="nav-number">2.1.</span> <span class="nav-text">用户态的分配算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#chunk"><span class="nav-number">2.1.1.</span> <span class="nav-text">chunk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bins"><span class="nav-number">2.1.2.</span> <span class="nav-text">bins</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内核态的slab分配器"><span class="nav-number">2.2.</span> <span class="nav-text">内核态的slab分配器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伙伴算法"><span class="nav-number">2.3.</span> <span class="nav-text">伙伴算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">3.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -576,11 +746,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
 
 
   
@@ -613,6 +781,10 @@
   
     
 
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2137989"></script>
+      <!-- UY END -->
     
   
 
