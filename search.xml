@@ -3,45 +3,6 @@
   
     
     <entry>
-      <title><![CDATA[map-reduce总结]]></title>
-      <url>/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/map-reduce/</url>
-      <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于工作原因，最近开始思考分布式的一些问题，在网上看了一些资料，找到一个比较系统的课程，<a href="https://pdos.csail.mit.edu/6.824/schedule.html" target="_blank" rel="external">mit的分布式课程</a>。个人还是很推荐这门课程的，理论和lab结合得很好，不过是门硬课，需要很多时间和精力。在这个博客专栏里。我会稍微总结下自己的一些学习过程。</p>
-<h2 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h2><p>前几天终于在零零碎碎的时间里把lab1实验也完成了，这样对于<a href="https://pdos.csail.mit.edu/6.824/papers/mapreduce.pdf" target="_blank" rel="external">map-reduce paper</a>中一些问题应该非常清楚了, 这里简单做一些总结。<br>map-reduce可以简单总结为一种协调集群进行数据处理的模型。它非常适合离线做一些functional的大数据处理工作。所谓的functional数学上讲幂等性，也就是通俗所说的可重入性。</p>
-<p>其工作简单概括可以认为是分治法，也就是所说的先map，然后reduce。在这里map函数和reduce函数在现有框架下，必须是幂等的。其工作流程，正如在论文中的下图所介绍，我总结为如下几步：</p>
-<p><center><img src="overview.png" alt="基本流程"></center></p>
-<ol>
-<li>第一阶段是把输入文件按照一定的标准进行分片(InputSplit)，总的分片数量是M。由于是在集群中运行（挂机器可能性相对要高），论文特意提到分片后的文件会在多个机器上存在备份，保证输入数据的可靠性。</li>
-<li>第二阶段是调度程序Master会调度空闲的worker执行Map阶段工作，这里的空闲worker有可能是已经处理完调度任务的，也有可能是新加入的可以用来调度的worker。</li>
-<li>第三阶段是每一个被调用的worker执行map方法。首先读取一个分片，然后执行Map方法，Map方法会将一个分片处理成N份结果（比如按照某一个规则hash）。理论上来说，map阶段总的需要M次worker调用，每一次产生N个中间结果集。</li>
-<li>第四阶段 Map阶段处理完毕，调度程序会调度空闲的worker执行Reduce工作，调度规则是一样的。</li>
-<li>第五阶段是每一个被调用的worker执行reduce方法。他要读取每一个分片处理结果的对应的N份中特定一份，然后执行Reduce方法。所以理论上来说，reduce阶段总的需要N次worker调用。</li>
-<li>返回用户结果</li>
-</ol>
-<p>当然文中提到了一些trick，印象比较深的：</p>
-<ol>
-<li>M数量远远大于worker数量，充分发挥并行性。</li>
-<li>当有一些机器处理的超时之后，可以启用新worker执行，因为可重入可以保证这个正确性，这样可以避免某些机器运行慢的短板效应，从而早收敛。</li>
-<li>合理运用本地disk，数据量处理很大的时候，网络可能成为性能瓶颈。</li>
-</ol>
-<h2 id="lab实现"><a href="#lab实现" class="headerlink" title="lab实现"></a>lab实现</h2><p>在我的github仓库中调通了在windows下的lab1。个人感觉上面理解好了之后，其实实验本身不复杂，但是go语言可能需要一些学习成本，主要是一些数据结构slice，map的操作，还有一些go的rpc和go协程的同步操作。推荐一下go的<a href="https://tour.golang.org/" target="_blank" rel="external">教程</a>，很实用，当然不是很全，但是课程中会给出很贴心的hint和参考资料。具体go代码不献丑了，不过也可以去我<a href="https://github.com/ctzld/mit-6.824" target="_blank" rel="external">github仓库</a>看一下。</p>
-]]></content>
-      
-        <categories>
-            
-            <category> 分布式系统 </category>
-            
-        </categories>
-        
-        
-        <tags>
-            
-            <tag> 分布式 </tag>
-            
-        </tags>
-        
-    </entry>
-    
-    <entry>
       <title><![CDATA[linux内存管理概论（二）]]></title>
       <url>/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/memory-management/</url>
       <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这周终于抽时间把内存知识重新梳理一下，记录如下。本文是一篇概论性文章，主要目的在于帮助形成正确的结构以及层次，不会有非常具体的讨论，但每个算法具体的一些细节和比较会在引用中给出。</p>
